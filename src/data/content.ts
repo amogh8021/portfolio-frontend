@@ -5,7 +5,7 @@ export const profile = {
   motto: 'Every Great Product Begins with the Right Move.',
   email: 'amoghdev8021@gmail.com',
   github: 'https://github.com/amogh8021',
-  linkedin: 'https://www.linkedin.com/in/amoghshrivastav',
+  linkedin: 'https://www.linkedin.com/in/amogh-shrivastav-45a6b0346/',
   resumeUrl: "/resume/Amogh_resume.pdf",
   focus:
     'Building scalable backend applications with Spring Boot while crafting clean and responsive user experiences using React.',
