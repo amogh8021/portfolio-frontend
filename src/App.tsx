@@ -28,7 +28,10 @@ export default function App() {
       setQuote(chessQuotes[Math.floor(Math.random() * chessQuotes.length)]);
     }, 1200);
     const t2 = setTimeout(() => setQuote(null), 7000);
-    return () => { clearTimeout(t); clearTimeout(t2); };
+    return () => { 
+      clearTimeout(t); 
+      clearTimeout(t2); 
+    };
   }, [loaded]);
 
   return (
@@ -50,24 +53,59 @@ export default function App() {
         <About />
         <Skills />
         <Projects />
-        <Timeline />
+        
+       
         <GitHub />
+        
+        {/* Chess journey / career timeline */}
+        <Timeline />
+        
         <Achievements />
         <Contact />
         <Footer moveCount={moveCount} />
       </motion.main>
 
-      {/* Chess quote toast */}
+      {/* ================= Chess Quote Toast ================= */}
       <AnimatePresence>
         {quote && (
           <motion.div
-            initial={{ opacity: 0, y: 20, x: '-50%' }}
-            animate={{ opacity: 1, y: 0, x: '-50%' }}
-            exit={{ opacity: 0, y: 20, x: '-50%' }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-6 left-1/2 z-[120] max-w-md rounded-full border border-ink/10 bg-paper-50/95 px-6 py-3 text-center text-sm text-ink/70 shadow-lg backdrop-blur-md"
+            initial={{
+              opacity: 0,
+              y: 35,
+              scale: 0.95,
+              x: "-50%",
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              x: "-50%",
+            }}
+            exit={{
+              opacity: 0,
+              y: 25,
+              scale: 0.95,
+              x: "-50%",
+            }}
+            transition={{
+              duration: 0.45,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="fixed bottom-6 left-1/2 z-[120] hidden max-w-lg items-center gap-3 rounded-2xl border border-gold/20 bg-paper/95 px-5 py-4 shadow-2xl backdrop-blur-xl md:flex"
           >
-            <span className="font-serif italic">{quote}</span>
+            {/* Chess Icon */}
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/10 text-xl text-gold">
+              ♞
+            </div>
+
+            <div>
+              <p className="font-serif italic leading-relaxed text-ink/75">
+                {quote}
+              </p>
+              <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.25em] text-gold">
+                Daily Chess Thought
+              </p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -1,52 +1,164 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
 const ACCENTS = [
-  { name: 'gold', rgb: '201 162 39', soft: 'rgba(201, 162, 39, 0.12)' },
-  { name: 'forest', rgb: '58 90 64', soft: 'rgba(58, 90, 64, 0.12)' },
-  { name: 'crimson', rgb: '180 60 60', soft: 'rgba(180, 60, 60, 0.12)' },
-  { name: 'teal', rgb: '40 120 120', soft: 'rgba(40, 120, 120, 0.12)' },
-];
+  {
+    name: "gold",
+    rgb: "201 162 39",
+    soft: "rgba(201,162,39,0.12)",
+  },
+  {
+    name: "forest",
+    rgb: "58 90 64",
+    soft: "rgba(58,90,64,0.12)",
+  },
+  {
+    name: "slate",
+    rgb: "75 85 99",
+    soft: "rgba(75,85,99,0.12)",
+  },
+  {
+    name: "royal",
+    rgb: "65 105 225",
+    soft: "rgba(65,105,225,0.12)",
+  },
+] as const;
+
+const STORAGE_KEY = "portfolio-accent";
+
+const TOTAL_MOVES = 40;
 
 export function useEasterEggs() {
   const [boardFlipped, setBoardFlipped] = useState(false);
-  const [accentIndex, setAccentIndex] = useState(0);
-  const [moveCount, setMoveCount] = useState(0);
 
-  const flipBoard = useCallback(() => setBoardFlipped((v) => !v), []);
+  const [showHelp, setShowHelp] = useState(false);
 
-  // Apply accent CSS variables
+  const [accentIndex, setAccentIndex] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (saved !== null) {
+      const index = Number(saved);
+
+      if (!Number.isNaN(index) && index >= 0 && index < ACCENTS.length) {
+        return index;
+      }
+    }
+
+    return 0;
+  });
+
+  const [moveCount, setMoveCount] = useState(1);
+
+  const flipBoard = useCallback(() => {
+    setBoardFlipped((prev) => !prev);
+  }, []);
+
+  const cycleAccent = useCallback(() => {
+    setAccentIndex((prev) => (prev + 1) % ACCENTS.length);
+  }, []);
+
+  // Apply Accent
+
   useEffect(() => {
-    const a = ACCENTS[accentIndex];
-    document.documentElement.style.setProperty('--accent', a.rgb);
-    document.documentElement.style.setProperty('--accent-soft', a.soft);
+    const accent = ACCENTS[accentIndex];
+
+    document.documentElement.style.setProperty("--accent", accent.rgb);
+
+    document.documentElement.style.setProperty(
+      "--accent-soft",
+      accent.soft
+    );
+
+    localStorage.setItem(STORAGE_KEY, accentIndex.toString());
   }, [accentIndex]);
 
-  // Keyboard shortcuts
+  // Smooth Scroll Counter
+
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
-      if (e.key.toLowerCase() === 'c') {
-        setBoardFlipped((v) => !v);
-      }
-      // Konami-ish: press "g g" to cycle accent
-      if (e.key.toLowerCase() === 'g') {
-        setAccentIndex((i) => (i + 1) % ACCENTS.length);
+    let ticking = false;
+
+    const updateMove = () => {
+      const max =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      const progress = max > 0 ? window.scrollY / max : 0;
+
+      const move = Math.min(
+        TOTAL_MOVES,
+        Math.max(1, Math.round(progress * TOTAL_MOVES))
+      );
+
+      setMoveCount(move);
+
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateMove);
+
+        ticking = true;
       }
     };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () =>
+      window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Move counter on scroll
+  // Keyboard Shortcuts
+
   useEffect(() => {
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = max > 0 ? window.scrollY / max : 0;
-      setMoveCount(Math.floor(pct * 40));
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      ) {
+        return;
+      }
 
-  return { boardFlipped, flipBoard, accentIndex, accentName: ACCENTS[accentIndex].name, moveCount };
+      switch (e.key.toLowerCase()) {
+        case "c":
+          flipBoard();
+          break;
+
+        case "g":
+          cycleAccent();
+          break;
+
+        case "?":
+          setShowHelp((v) => !v);
+          break;
+
+        case "escape":
+          setShowHelp(false);
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () =>
+      window.removeEventListener("keydown", handleKeyDown);
+  }, [flipBoard, cycleAccent]);
+
+  return {
+    boardFlipped,
+
+    flipBoard,
+
+    accentIndex,
+
+    accentName: ACCENTS[accentIndex].name,
+
+    moveCount,
+
+    showHelp,
+
+    setShowHelp,
+  };
 }

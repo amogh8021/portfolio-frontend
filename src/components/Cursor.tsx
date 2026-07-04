@@ -45,4 +45,4 @@ export default function Cursor() {
       />
     </motion.div>
   );
-}
+}  
