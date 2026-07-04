@@ -146,3 +146,14 @@ GitHub ---- "https://github.com/amogh8021"
 
 If you found this project helpful, consider giving it a ⭐ on GitHub.
 It motivates me to build more open-source projects.
+
+## 💡 Final Note
+
+Building software is a continuous journey of learning, experimenting, and improving.
+This portfolio reflects my current skills and mindset as a Java Full Stack Developer, and I look forward to evolving it with every new project.
+
+Thank you for visiting!
+
+---
+
+Made with ❤️ by **Amogh Shrivastav**
