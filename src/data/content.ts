@@ -173,7 +173,7 @@ export const projects: Project[] = [
 
   github: "https://github.com/amogh8021/Bookstore",
 
-  live: "https://portfolio-frontend-delta-tan.vercel.app",
+  live: "#",
 
   metrics: [
     {
@@ -189,8 +189,8 @@ export const projects: Project[] = [
       value: "Razorpay",
     },
     {
-      label: "Vercel & Render",
-      value: "Deployed",
+      label: "User, Admin",
+      value: "Roles",
     },
   ],
 
