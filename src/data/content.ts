@@ -502,25 +502,25 @@ export const strategicMoves: StrategicMove[] = [
 
 export const achievements = [
   {
-    value: "6+",
+    value: "7+",
     label: "Projects Built",
     detail:
       "Full Stack and Backend applications using Java, Spring Boot, React and MySQL.",
   },
   {
-    value: "150+",
+    value: "100+",
     label: "DSA Problems",
     detail:
       "Solved on LeetCode and GeeksforGeeks to strengthen problem-solving skills.",
   },
   {
-    value: "150+",
+    value: "100+",
     label: "REST APIs",
     detail:
       "Developed secure and scalable REST APIs using Spring Boot.",
   },
   {
-    value: "5+",
+    value: "3+",
     label: "Certificates",
     detail:
       "Completed certifications in Java, Web Development and Backend technologies.",
