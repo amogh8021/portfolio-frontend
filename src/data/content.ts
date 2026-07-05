@@ -120,7 +120,7 @@ export interface Project {
 
   duration: string;
 
-  image: string;
+  image: string[];
 
   github?: string;
 
@@ -148,87 +148,194 @@ export interface Project {
 
 
 export const projects: Project[] = [
+
   {
-    slug: "bookstore",
+  slug: "bookstore",
 
-    name: "BookStore",
+  name: "BookStore",
 
-    tagline: "A complete full-stack bookstore built with Spring Boot and React.",
+  tagline:
+    "A production-inspired full-stack bookstore built with Spring Boot and React.",
 
-    category: "Full Stack",
+  category: "Full Stack",
 
-    duration: "3 Weeks",
+  duration: "7 week",
 
-    image: "/projects/bookstore.webp",
+  image: [
+       "/projects/bookstore/shop.png",
+      "/projects/bookstore/dashboard.png",
+      "/projects/bookstore/login.png"
+    ] ,
 
-    accent: "gold",
+  accent: "gold",
 
-    status: "shipped",
+  status: "shipped",
 
-    github: "https://github.com/amogh8021/Bookstore",
+  github: "https://github.com/amogh8021/Bookstore",
 
-    live: "#",
+  live: "https://portfolio-frontend-delta-tan.vercel.app",
 
-    metrics: [
-      {
-        label: "REST APIs",
-        value: "25+",
-      },
-      {
-        label: "Database",
-        value: "12 Tables",
-      },
-      {
-        label: "Security",
-        value: "JWT",
-      },
-      {
-        label: "Frontend",
-        value: "React",
-      },
-    ],
+  metrics: [
+    {
+      label: "Modules",
+      value: "10+",
+    },
+    {
+      label: "Security",
+      value: "JWT",
+    },
+    {
+      label: "Payment",
+      value: "Razorpay",
+    },
+    {
+      label: "Vercel & Render",
+      value: "Deployed",
+    },
+  ],
 
-    problem:
-      "Most bookstore tutorials only demonstrate CRUD operations. I wanted to build something much closer to a real-world application where users can browse books, authenticate securely, manage shopping carts, place orders and administrators can manage the catalog.",
+  problem:
+    "Most bookstore projects focus only on basic CRUD operations. I wanted to build a production-style application that combines secure authentication, role-based authorization, shopping cart management, online payments, order processing, and an admin dashboard into a single modular system.",
 
-    solution:
-      "Built a production-style full-stack bookstore using Spring Boot and React with JWT authentication, role-based authorization, REST APIs and an admin dashboard.",
+  solution:
+    "Developed a complete full-stack bookstore where users can securely register, browse books, manage wishlists and carts, place orders, and complete online payments. Administrators can manage books, offers, orders, and users through protected REST APIs secured with Spring Security and JWT.",
 
-    architecture:
-      "Layered architecture using Controller → Service → Repository with MySQL database. Spring Security handles authentication while Hibernate/JPA manages persistence. React communicates through REST APIs.",
+  architecture:
+    "Designed using a layered architecture (Controller → Service → Repository) with Spring Boot, Spring Security, JWT authentication, Hibernate/JPA, MySQL, and a React frontend communicating through REST APIs. The project follows clean separation of concerns with DTOs, mappers, exception handling, and modular services.",
 
-    techStack: [
-      "Java",
-      "Spring Boot",
-      "Spring Security",
-      "JWT",
-      "Hibernate",
-      "JPA",
-      "React",
-      "MySQL",
-      "REST API",
-    ],
+  techStack: [
+    "Java",
+    "Spring Boot",
+    "Spring Security",
+    "JWT",
+    "Hibernate",
+    "JPA",
+    "MySQL",
+    "React",
+    "javascript",
+    "chart.js",
+    "REST API",
+    "Docker",
+    "Google OAuth",
+    "Razorpay",
+  ],
 
-    features: [
-      "User Authentication",
-      "JWT Login",
-      "Role Based Authorization",
-      "Book Catalog",
-      "Search & Filter",
-      "Shopping Cart",
-      "Order Management",
-      "Admin Dashboard",
-      "REST APIs",
-      "Responsive React UI",
-    ],
+  features: [
+    "JWT Authentication",
+    "Google OAuth Login",
+    "Role-Based Authorization",
+    "Book Management",
+    "Shopping Cart",
+    "Wishlist",
+    "Order Management",
+    "Razorpay Payment Integration",
+    "Admin Dashboard",
+    "Offer Management",
+    "RESTful APIs",
+    "Responsive React UI",
+  ],
 
-    challenges:
-      "Implementing JWT authentication correctly using Spring Security filters, understanding authentication flow and securing protected endpoints.",
+  challenges:
+    "One of the biggest challenges was understanding Spring Security and implementing JWT authentication correctly while protecting routes based on user roles. Integrating payments, authentication, and multiple business modules into a clean architecture also required careful API and database design.",
 
-    lessons:
-      "Learned how enterprise applications are structured, how frontend communicates with backend through REST APIs and why clean architecture matters more than adding random features.",
-  },
+  lessons:
+    "This project helped me understand how real-world full-stack applications are structured. I learned how authentication, authorization, database relationships, REST APIs, frontend integration, and modular backend architecture work together to build scalable applications.",
+},
+
+{
+  slug: "poshansetu",
+
+  name: "PoshanSetu",
+
+  tagline:
+    "AI-powered nutrition and healthcare platform for Anganwadi management.",
+
+  category: "Full Stack (Team Project - 3)",
+
+  duration: "College Major Project",
+
+ image: [
   
+      "/projects/poshansetu/login.png",
+      "/projects/poshansetu/dashboard.png",
+      "/projects/poshansetu/parent.png",
+      "/projects/poshansetu/admin.png"
+    ] ,
+
+  accent: "forest",
+
+  status: "in-progress",
+
+  github: "https://github.com/amogh8021",
+
+  live: "#",
+
+  metrics: [
+    {
+      label: "Architecture",
+      value: "4-Tier",
+    },
+    {
+      label: "ML Models",
+      value: "2",
+    },
+    {
+      label: "User Roles",
+      value: "3",
+    },
+    {
+      label: "team-member",
+      value: "3",
+    },
+  ],
+
+  problem:
+    "Anganwadi centres still rely heavily on paper records to manage child growth, maternal health, vaccinations and nutrition. Manual workflows make it difficult to identify high-risk children, maintain historical records and coordinate efficiently between parents, healthcare workers and administrators.",
+
+  solution:
+    "Built an AI-powered healthcare platform that digitizes Anganwadi operations using React, Spring Boot and a Flask machine learning microservice. The system predicts child malnutrition and pregnancy risk, manages vaccination schedules, tracks nutrition and provides role-based dashboards for different users.",
+
+  architecture:
+    "Designed as a four-tier architecture with a React frontend, Spring Boot REST APIs, Flask-based ML microservice and MySQL database. Spring Security with JWT secures the application while REST communication connects the backend with machine learning services and Twilio SMS notifications.",
+
+  techStack: [
+    "Java",
+    "Spring Boot",
+    "Spring Security",
+    "JWT",
+    "React",
+    "Tailwind CSS",
+    "MySQL",
+    "Python",
+    "Flask",
+    "Scikit-Learn",
+    "Random Forest",
+    "REST API",
+    "Twilio",
+  ],
+
+  features: [
+    "JWT Authentication",
+    "Role-Based Access Control",
+    "Child Health Monitoring",
+    "Malnutrition Prediction",
+    "Pregnancy Risk Prediction",
+    "Vaccination Management",
+    "Nutrition Tracking",
+    "Attendance Management",
+    "Growth Analytics",
+    "Twilio SMS Notifications",
+    "REST API Integration",
+    "Responsive Dashboard",
+  ],
+
+  challenges:
+    "Coordinating multiple technologies across frontend, backend and machine learning services while maintaining secure authentication, REST communication and reliable data flow between Spring Boot and the Flask prediction service.",
+
+  lessons:
+    "This project strengthened my understanding of enterprise backend architecture, JWT authentication, REST API integration and team collaboration. It also gave me practical exposure to integrating machine learning services into a full-stack application.",
+
+},
 
   {
     slug: "juttjao",
@@ -241,13 +348,17 @@ export const projects: Project[] = [
 
     duration: "Planning",
 
-    image: "/projects/juttjao.webp",
+    image: [
+      "/projects/bookstore.webp",
+      "/projects/bookstore-dashboard.webp",
+      "/projects/bookstore-cart.webp"
+    ],
 
     accent: "forest",
 
     status: "in-progress",
 
-    github: "https://github.com/amogh8021",
+    github: "https://github.com/amogh8021/Poshansetu",
 
     live: "#",
 
@@ -304,69 +415,7 @@ export const projects: Project[] = [
       "Software engineering starts with understanding users, not writing code. Good planning saves months of unnecessary development.",
   },
 
-  {
-    slug: "next-move",
-
-    name: "Next Move",
-
-    tagline: "Always learning. Always building.",
-
-    category: "Research",
-
-    duration: "Future",
-
-    image: "/projects/nextmove.webp",
-
-    accent: "ink",
-
-    status: "planned",
-
-    metrics: [
-      {
-        label: "Status",
-        value: "Research",
-      },
-      {
-        label: "Architecture",
-        value: "Planning",
-      },
-      {
-        label: "Goal",
-        value: "Production",
-      },
-      {
-        label: "Stack",
-        value: "TBD",
-      },
-    ],
-
-    problem:
-      "Technology evolves continuously and every completed project opens the door to solving more meaningful problems.",
-
-    solution:
-      "Instead of creating unfinished side projects, I focus on researching, planning and building one high-quality production-ready application at a time.",
-
-    architecture:
-      "Currently under research and architectural planning.",
-
-    techStack: [
-      "Spring Boot",
-      "React",
-      "Docker",
-    ],
-
-    features: [
-      "Research",
-      "Architecture",
-      "Planning",
-    ],
-
-    challenges:
-      "Choosing the right problem to solve is usually harder than writing the code itself.",
-
-    lessons:
-      "Quality compounds. A few well-built projects teach far more than dozens of incomplete ones.",
-  },
+ 
 ];
 
 export type StrategicMove = {

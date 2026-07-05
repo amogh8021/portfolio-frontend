@@ -57,7 +57,7 @@ export default function App() {
        
         <GitHub />
         
-        {/* Chess journey / career timeline */}
+       
         <Timeline />
         
         <Achievements />
